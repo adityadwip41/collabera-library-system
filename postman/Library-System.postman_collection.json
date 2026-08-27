@@ -1,0 +1,30 @@
+{
+  "info": {
+    "name": "Library System API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [{"key": "baseUrl", "value": "http://localhost:8080"}, {"key": "borrowerId", "value": "1"}, {"key": "bookId", "value": "1"}],
+  "item": [
+    {
+      "name": "Register borrower",
+      "request": {
+        "method": "POST",
+        "header": [{"key": "Content-Type", "value": "application/json"}],
+        "body": {"mode": "raw", "raw": "{\n  \"name\": \"Alice Johnson\",\n  \"email\": \"alice@example.com\"\n}"},
+        "url": "{{baseUrl}}/api/v1/borrowers"
+      }
+    },
+    {
+      "name": "Register book copy",
+      "request": {
+        "method": "POST",
+        "header": [{"key": "Content-Type", "value": "application/json"}],
+        "body": {"mode": "raw", "raw": "{\n  \"isbn\": \"9780132350884\",\n  \"title\": \"Clean Code\",\n  \"author\": \"Robert C. Martin\"\n}"},
+        "url": "{{baseUrl}}/api/v1/books"
+      }
+    },
+    {"name": "List books", "request": {"method": "GET", "url": "{{baseUrl}}/api/v1/books?page=0&size=20&sortBy=title&direction=ASC"}},
+    {"name": "Borrow book", "request": {"method": "POST", "url": "{{baseUrl}}/api/v1/borrowers/{{borrowerId}}/borrowed-books/{{bookId}}"}},
+    {"name": "Return book", "request": {"method": "DELETE", "url": "{{baseUrl}}/api/v1/borrowers/{{borrowerId}}/borrowed-books/{{bookId}}"}}
+  ]
+}
